@@ -1,3 +1,8 @@
+---
+layout: default
+title: Configuring Redcarpet
+---
+
 GitHub Markdown on GitHub Pages
 ===============================
 
