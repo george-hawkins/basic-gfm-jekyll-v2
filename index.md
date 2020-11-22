@@ -8,7 +8,7 @@ GitHub Markdown on GitHub Pages
 
 GitHub Pages are great but wouldn't you like to be able to use .md files, instead of having to provide HTML, and have those files render like they do in GitHub README's etc?
 
-The following covers how to do this.
+The following covers how to do this. To see the kind of results you can achive, click [here](https://george-hawkins.github.io/basic-gfm-jekyll-v2/) to see this README served via GitHub Pages.
 
 Install RVM
 -----------
@@ -33,7 +33,7 @@ Open a new terminal to pull in these changes.
 Install Jekyll
 --------------
 
-Install Jekyll (as per the Jekyll [installation instructions](https://jekyllrb.com/docs/installation/ubuntu/):
+Install Jekyll (as per the Jekyll [installation instructions](https://jekyllrb.com/docs/installation/ubuntu/)):
 
     $ gem install jekyll bundler
 
@@ -45,7 +45,7 @@ Then make a directory for your experiments, this will _not_ be the root for your
     $ mdkir experiment
     $ cd experiment
 
-Then roughly following the [details](https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/creating-a-github-pages-site-with-jekyll) from GitHub docs:
+Then roughly following the [details](https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/creating-a-github-pages-site-with-jekyll) from GitHub Docs:
 
     $ bundle init
     $ echo '' >> Gemfile
@@ -130,63 +130,32 @@ Now we're ready to serve it locally:
 
 Open the link <http://127.0.0.1:4000/> in your browser to see the result.
 
-Getting the result served by GitHub pages
+Getting the result served by GitHub Pages
 -----------------------------------------
 
+Now you're ready to get things served from GitHub pages.
 
+Create an empty repository on GitHub, e.g. with the name `my-gh-pages-site`.
 
-Things to check
----------------
+Edit the `_config.yml` file and:
 
-The following are examples that test that everything renders as it does in GitHub markdown.
+* Set the `url` value to `https://username.github.io`, replacing `username` with your GitHub username, e.g. `george-hawkins` in my case.
+* Set the `baseurl` to your new repository's name preceded by `/`, e.g. `/my-gh-pages-site`.
 
-The `_` character within words shouldn't turn on emphasis, i.e. foo_bar shouldn't render as foo<i>bar</i>, i.e. without the underscore and with the "bar" part in italics.
+Now add all your work to git:
 
-Tables should render properly:
+    $ git init
+    $ git add .
+    $ git commit -m 'Initial import'
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+Now follow the GitHub instructions for pushing an existing repository.
 
-Standard Markdown supports code blocks, with no special highlighting, that are created by indenting each line by four spaces.
+Then go to _Settings_ for your repository, scroll down to the _GitHub Pages_ section and save your main branch as the branch to be used as the source for your GitHub Pages site.
 
-With `fenced_code_blocks` code blocks can be fenced by three backticks with an optional language name from [languages.yml](https://github.com/github/linguist/blob/master/lib/linguist/languages.yml).
+Note: previously, you had to create a `gh-pages` branch but now you can specify any branch using this setting.
 
-The following fenced code block should have syntax highlighting:
+It should then tell you the link you can use to access your pages once they're published, it'll be of the form:
 
-```javascript
-var s = "JavaScript syntax highlighting";
-alert(s);
-```
+    https://username.github.io/my-gh-pages-site
 
-GitHub automatically renders things like the following as links:
-
-foo@bar.com  
-www.example.com  
-http://www.example.com/
-
-This isn't supported, if you want them rendered as links you must surround them with `<` and `>`, e.g. `<foo@bar.com>` renders as <foo@bar.com>.
-
-You can strikethrough text with two `~` characters at the start and end, e.g. `~~strikethrough~~` renders as ~~strikethrough~~.
-
-In traditional Markdown any HTML has to be bounded by blank lines in order to be interpreted as HTML. But this shouldn't be necessary here - the following should render as a single cell HTML table despite not being surrounded by blank lines:
-
-A non-empty line before the HTML.
-<table>
-    <tr>
-        <td>Single cell HTML table</td>
-    </tr>
-</table>
-A non-empty line after the HTML.
-
-GitHub used to support you being sloppy and not having to add a space after the hashes used to introduce a heading, but no more. The example here without the space should not render as a heading:
-
-##### With a space h5-header
-
-#####Without a space h5-header
-
-GitHub disables using `==` to highlight text, if it were enabled then ==highlighted== would appear as <mark>highlighted</mark>.
-
-Smart quotes are disabled by GitHub, if they weren't then then "quote" would appear as <q>quote</q>.
+You can also get there via the _Environments_ link on the main page of your repository. The _Environments_ page will show you when your pages have been deployed and provides a _View deployment_ button to view them.
